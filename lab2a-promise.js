@@ -10,35 +10,16 @@ function flip() {
 
 //// Add code here that will "flip" the coin ten times and write the 
 //// result to the console (e.g. "Heads" or "Tails" for each flip).
-function flipCoin() {
-    return (Math.random() > 0.5);
-}
+for (let i=0; i<10; i++) {
+	flip().then(
+		() => {console.log("Heads!")},
+		() => {console.log("Tails!")}
 
-function heads() {
-    console.log("Heads!");
-}
-
-function tails() {
-    console.log("Tails!");
-}
-
-// This is the function that the Promise will invoke when it's "go" time.
-// The parameters are *functions* that will be called depending on what happens
-function resolvePromise(resolve, reject) { 
-    if (flipCoin()) resolve();
-    else reject();
-}   
-
-let p = new Promise(resolvePromise); // this sets the Promise up, but nothing happens yet
-
-for (let i = 0; i < 10; i++) {
-    p.then(heads, tails);
-    p = new Promise(resolvePromise); // what happens if you remove this?
+		);
 }
 
 
 
-/*
 
 ///// Problem 2 - More fun...
 
@@ -46,9 +27,22 @@ function countBig(bignum) {
     // Add code here that returns a Promise that will resolve after it has counted to bignum
     ///////////////////////////////////////////////////////////////////////
 
-// "Normal" functions
+    let i=0;
+    for (i=0; i<bignum; i++);
+    	let p =new Promise ((resolve,reject)=>{
+    		if(i == bignum) resolve();
+    		else reject();
+    	})
+
+return p;
+
+
+
+
+
 }
 
+/*
 function squish(word) {
     if (word.length < 2) {
         return word;
@@ -132,6 +126,8 @@ console.log("Sorted by 'biggest' letter: " + someWords);
 
 }
 
+*/
+
 
 start = Date.now();
 bignum = 1000000000;
@@ -141,4 +137,4 @@ countBig(1000000000).then(()=> {
     console.log("A problem occurred while trying to count to " + bignum);
 })
 
-*/
+
